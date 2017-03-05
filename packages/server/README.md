@@ -1,9 +1,5 @@
 # Server - API only
 
-Mono repo
-
-* Using `oao`
-
 Core:
 
 * typescript
@@ -16,7 +12,6 @@ Database:
 * Postgres
 * Sequalize 
 
-Test:
 
-* ava
+
 

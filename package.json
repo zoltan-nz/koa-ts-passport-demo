@@ -3,6 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:zoltan-nz/koa-ts-passport-demo.git",
-  "author": "Zoltan <zdebre@gmail.com>",
-  "license": "MIT"
+  "author": "Zoltan",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 6"
+  },
+  "scripts": {
+    "bootstrap": "oao bootstrap",
+    "deps:add": "oao add",
+    "deps:remove": "oao remove",
+    "deps:upgrade": "oao upgrade",
+    "deps:clean": "oao clean"
+  },
+  "devDependencies": {
+    "oao": "^0.8.0"
+  }
 }

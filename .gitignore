@@ -1,1 +1,7 @@
 .idea
+node_modules
+dist
+build
+.nyc_output
+coverage
+.yarnclean
