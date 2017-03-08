@@ -17,5 +17,6 @@
   },
   "devDependencies": {
     "oao": "^0.8.0"
-  }
+  },
+  "dependencies": {}
 }
