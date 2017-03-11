@@ -6,7 +6,7 @@ import send = require('koa-send');
 import * as Router from 'koa-router';
 import compress = require('koa-compress');
 
-const STATIC_CONTENT_PATH = '../../client/build';
+const STATIC_CONTENT_PATH = '../../client-ember/dist';
 
 const app = new Koa();
 const router = new Router();
