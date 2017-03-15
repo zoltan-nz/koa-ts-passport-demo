@@ -1,4 +1,6 @@
 import passport = require('koa-passport');
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+import { Strategy as LocalStrategy } from 'passport-local';
 
 const fetchUser = (() => {
   const user = { id: 1, username: 'test', password: 'test' };
@@ -12,12 +14,11 @@ passport.deserializeUser(async (id, done) => {
     const user = await fetchUser();
     done(null, user);
   } catch (err) {
-    done(err);
+    done(err, null);
   }
 });
 
-import LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy(function(username, password, done) {
+passport.use(new LocalStrategy((username, password, done) => {
   fetchUser()
     .then(user => {
       if (username === user.username && password === user.password) {
@@ -29,38 +30,37 @@ passport.use(new LocalStrategy(function(username, password, done) {
     .catch(err => done(err));
 }));
 
-const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
+    callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/facebook/callback',
     clientID: 'your-client-id',
     clientSecret: 'your-secret',
-    callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/facebook/callback'
   },
-  function(token, tokenSecret, profile, done) {
+  (token, tokenSecret, profile, done) => {
     // retrieve user ...
     fetchUser().then(user => done(null, user));
   }
 ));
 
-const TwitterStrategy = require('passport-twitter').Strategy;
-passport.use(new TwitterStrategy({
-    consumerKey: 'your-consumer-key',
-    consumerSecret: 'your-secret',
-    callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/twitter/callback'
-  },
-  function(token, tokenSecret, profile, done) {
-    // retrieve user ...
-    fetchUser().then(user => done(null, user));
-  }
-));
-
-const GoogleStrategy = require('passport-google-auth').Strategy;
-passport.use(new GoogleStrategy({
-    clientId: 'your-client-id',
-    clientSecret: 'your-secret',
-    callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/google/callback'
-  },
-  function(token, tokenSecret, profile, done) {
-    // retrieve user ...
-    fetchUser().then(user => done(null, user));
-  }
-));
+// const TwitterStrategy = require('passport-twitter').Strategy;
+// passport.use(new TwitterStrategy({
+//     consumerKey: 'your-consumer-key',
+//     consumerSecret: 'your-secret',
+//     callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/twitter/callback'
+//   },
+//   function(token, tokenSecret, profile, done) {
+//     // retrieve user ...
+//     fetchUser().then(user => done(null, user));
+//   }
+// ));
+//
+// const GoogleStrategy = require('passport-google-auth').Strategy;
+// passport.use(new GoogleStrategy({
+//     clientId: 'your-client-id',
+//     clientSecret: 'your-secret',
+//     callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/google/callback'
+//   },
+//   function(token, tokenSecret, profile, done) {
+//     // retrieve user ...
+//     fetchUser().then(user => done(null, user));
+//   }
+// ));
