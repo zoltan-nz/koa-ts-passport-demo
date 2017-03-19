@@ -3,22 +3,23 @@
     "declaration": true,
     "outDir": "./build",
     "baseUrl": "./src",
-    "lib": ["es6"],
+    "lib": ["ES6"],
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "ES6",
     "moduleResolution": "node",
     "typeRoots": [
-      "node_modules/@types",
-      "@types"
-    ]
+      "@types",
+      "./node_modules/@types"
+    ],
+    "pretty": true,
+    "experimentalDecorators": true
   },
   "include": [
     "./src/**/*"
   ],
   "exclude": [
-    "./node_modules",
-    "./**/*-test.ts"
+    "./node_modules"
   ]
 }

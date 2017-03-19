@@ -6,17 +6,11 @@
   "author": "Zoltan",
   "license": "MIT",
   "engines": {
-    "node": ">= 7.6"
+    "node": ">=7.6"
   },
-  "scripts": {
-    "bootstrap": "oao bootstrap",
-    "deps:add": "oao add",
-    "deps:remove": "oao remove",
-    "deps:upgrade": "oao upgrade",
-    "deps:clean": "oao clean"
-  },
+  "scripts": {},
   "devDependencies": {
-    "oao": "^0.8.0"
+    "webpack": "^2.4.1"
   },
   "dependencies": {}
 }

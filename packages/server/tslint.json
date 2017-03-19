@@ -5,6 +5,7 @@
     "quotemark": [true, "single", "avoid-escape"],
     "trailing-comma": false,
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "interface-name": false
+    "interface-name": false,
+    "no-unused-expression": false
   }
 }
