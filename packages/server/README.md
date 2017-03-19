@@ -1,11 +1,15 @@
 # Server - API only
 
-Run:
+## Run server
 
-```
-$ npm run watch:test
-$ npm run watch:build
-$ npm run watch:server
+Run following commands separately:
+
+```shell
+$ cd packages/server
+$ yarn watch:build
+$ yarn watch:server
+$ yarn watch:test
+$ open http://localhost:4000
 ```
 
 Core:
