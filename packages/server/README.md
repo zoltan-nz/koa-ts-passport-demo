@@ -24,6 +24,9 @@ Database:
 * Postgres
 * Sequalize 
 
+### Implementation log
+
+Simple 
 
 
 

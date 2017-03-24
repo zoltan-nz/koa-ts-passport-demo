@@ -11,14 +11,14 @@
   "scripts": {
     "rm": "rimraf build .nyc_output coverage",
     "lint": "tslint --project ./tsconfig.json --force --fix --type-check",
-    "build": "tsc --pretty",
+    "build": "./node_modules/.bin/webpack --config webpack.config.ts",
     "test": "yarn run lint && tslint --force --fix ./test/**/*.ts && NODE_ENV=test mocha",
     "test:coverage": "yarn run rm && nyc yarn build && nyc yarn test && open coverage/index.html",
     "prepare": "yarn test",
-    "watch:build": "yarn build -- --watch",
+    "watch:build": "yarn build -- --progress --watch",
     "watch:test": "NODE_ENV=test yarn test -- --watch",
     "watch:server": "NODE_ENV=development DEBUG=* nodemon --watch build ./build/index.js",
-    "start": "./node_modules/.bin/webpack --config webpack.config.ts"
+    "start": "./node_modules/.bin/webpack --config webpack.config.ts --progress --watch"
   },
   "devDependencies": {
     "@types/chai": "^3.5.1",
