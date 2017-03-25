@@ -1,7 +1,9 @@
 import * as path from 'path';
 
 export default {
-  entry: './src/index.ts',
+  cache: true,
+  devtool: 'cheap-module-eval-source-map',
+  entry: './src/server.ts',
   target: 'node',
   module: {
     rules: [
@@ -13,15 +15,27 @@ export default {
       {
         test: /\.html$/,
         loader: 'html-loader'
+      },
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars-loader'
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]?[hash]'
+        }
       }
     ]
   },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
+    filename: 'server.bundle.js',
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/'
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.html']
+    extensions: ['.tsx', '.ts', '.js', '.html', '.hbs']
   },
   node: {
     fs: 'empty',

@@ -26,7 +26,17 @@ Database:
 
 ### Implementation log
 
-Simple 
+Simple page rendering:
+
+* koa-webpack
+
+Webpack loaders:
+
+* ts-loader
+* handlebars-loader
+* file-loader
+
+
 
 
 

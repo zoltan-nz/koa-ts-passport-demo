@@ -11,18 +11,19 @@
   "scripts": {
     "rm": "rimraf build .nyc_output coverage",
     "lint": "tslint --project ./tsconfig.json --force --fix --type-check",
-    "build": "./node_modules/.bin/webpack --config webpack.config.ts",
+    "build": "./node_modules/.bin/webpack --config webpack.config.ts --progress --colors",
     "test": "yarn run lint && tslint --force --fix ./test/**/*.ts && NODE_ENV=test mocha",
     "test:coverage": "yarn run rm && nyc yarn build && nyc yarn test && open coverage/index.html",
     "prepare": "yarn test",
-    "watch:build": "yarn build -- --progress --watch",
+    "watch:build": "yarn build -- --watch --hot",
     "watch:test": "NODE_ENV=test yarn test -- --watch",
-    "watch:server": "NODE_ENV=development DEBUG=* nodemon --watch build ./build/index.js",
+    "watch:server": "NODE_ENV=development DEBUG=* nodemon --watch build ./build/server.bundle.js",
     "start": "./node_modules/.bin/webpack --config webpack.config.ts --progress --watch"
   },
   "devDependencies": {
     "@types/chai": "^3.5.1",
     "@types/chai-http": "^0.0.30",
+    "@types/handlebars": "^4.0.32",
     "@types/http-status": "^0.2.29",
     "@types/koa": "^2.0.39",
     "@types/koa-bodyparser": "^3.0.23",
@@ -40,8 +41,11 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "coveralls": "^2.13.0",
+    "handlebars": "^4.0.6",
+    "handlebars-loader": "^1.5.0",
     "html-loader": "^0.4.5",
     "http-status": "^1.0.1",
+    "koa-webpack": "^0.3.1",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",
@@ -61,6 +65,7 @@
     "koa-send": "^4",
     "koa-session-minimal": "^3.0.3",
     "koa-static": "^3.0.0",
+    "koa-webpack": "^0.3.1",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0"
   }

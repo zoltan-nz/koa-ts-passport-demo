@@ -1,31 +1,28 @@
-import * as fs from 'fs';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
-
-import * as path from 'path';
 import koaStatic = require('koa-static');
 import koaSend = require('koa-send');
 import koaCompress = require('koa-compress');
 import koaBodyParser = require('koa-bodyparser');
+import * as Handlebars from 'handlebars';
 
-const appHtml = require('./views/app.html');
-const loginHtml = require('./views/login.html');
+const STATIC_CONTENT_PATH = './public';
 
-const STATIC_CONTENT_PATH = '../../client-ember/dist';
-
-const app = new Koa();
+const app    = new Koa();
 const router = new Router();
 
-app.use(koaBodyParser());
-app.use(koaCompress());
+const indexTemplate = require('./views/index.hbs');
 
 router.get('/', ctx => {
   ctx.type = 'html';
-  ctx.body = appHtml;
+  ctx.body = indexTemplate({title: 'Hello World'});
 });
 
-app.use(router.routes());
+app
+  .use(koaBodyParser())
+  .use(koaCompress())
+  .use(router.routes())
+  .use(koaStatic(`${__dirname}/public`))
+  .listen(4000);
 
-app.listen(4000);
 process.stdout.write('Listening on port 4000...');
-
