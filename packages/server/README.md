@@ -6,9 +6,8 @@ Run following commands separately:
 
 ```shell
 $ cd packages/server
-$ yarn watch:build
-$ yarn watch:server
-$ yarn watch:test
+$ npm run watch:build
+$ npm run watch:server
 $ open http://localhost:4000
 ```
 
@@ -16,27 +15,6 @@ Core:
 
 * typescript
 * koa.js
-* passport
-* bcrypt
-
-Database:
-
-* Postgres
-* Sequalize 
-
-### Implementation log
-
-Simple page rendering:
-
-* koa-webpack
-
-Webpack loaders:
-
-* ts-loader
-* handlebars-loader
-* file-loader
-
-
 
 
 

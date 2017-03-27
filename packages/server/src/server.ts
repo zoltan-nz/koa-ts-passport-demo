@@ -1,28 +1,31 @@
 import * as Koa from 'koa';
+import * as hbs from 'koa-hbs';
 import * as Router from 'koa-router';
+
 import koaStatic = require('koa-static');
-import koaSend = require('koa-send');
+
 import koaCompress = require('koa-compress');
 import koaBodyParser = require('koa-bodyparser');
-import * as Handlebars from 'handlebars';
-
-const STATIC_CONTENT_PATH = './public';
 
 const app    = new Koa();
 const router = new Router();
 
-const indexTemplate = require('./views/index.hbs');
-
-router.get('/', ctx => {
-  ctx.type = 'html';
-  ctx.body = indexTemplate({title: 'Hello World'});
+router.get('/', async ctx => {
+  await ctx.render('pages/home', { title: 'hello world' });
 });
 
 app
+  .use(koaCompress()) // HTTP compression
   .use(koaBodyParser())
-  .use(koaCompress())
-  .use(router.routes())
-  .use(koaStatic(`${__dirname}/public`))
-  .listen(4000);
+  .use(koaStatic(`./build/public`, { maxage: 1000 * 60 * 60 })) // 1 hour browser cache
 
-process.stdout.write('Listening on port 4000...');
+  .use(hbs.middleware({
+    defaultLayout: 'default',
+    layoutsPath:   `${__dirname}/templates/layout`,
+    partialsPath:  [`${__dirname}/templates/layout/partials`, `${__dirname}./templates/pages/partials`],
+    viewPath:      `${__dirname}/templates`
+  }))
+  .use(router.routes())
+  .listen(process.env.PORT || 4000);
+
+process.stdout.write(`${process.version} Listening on port ${process.env.PORT || 4000}`);
