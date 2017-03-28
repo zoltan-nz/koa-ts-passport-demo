@@ -1,14 +1,15 @@
 import * as Koa from 'koa';
-import * as hbs from 'koa-hbs';
-import * as Router from 'koa-router';
 
-import koaStatic = require('koa-static');
+import * as koaBodyParser from 'koa-bodyparser';
+import * as koaCompress from 'koa-compress';
+import * as koaHbs from 'koa-hbs';
+import * as koaRouter from 'koa-router';
+import * as koaStatic from 'koa-static';
 
-import koaCompress = require('koa-compress');
-import koaBodyParser = require('koa-bodyparser');
+import * as path from 'path';
 
 const app    = new Koa();
-const router = new Router();
+const router = new koaRouter();
 
 router.get('/', async ctx => {
   await ctx.render('pages/home', { title: 'hello world' });
@@ -19,11 +20,14 @@ app
   .use(koaBodyParser())
   .use(koaStatic(`./build/public`, { maxage: 1000 * 60 * 60 })) // 1 hour browser cache
 
-  .use(hbs.middleware({
+  .use(koaHbs.middleware({
     defaultLayout: 'default',
-    layoutsPath:   `${__dirname}/templates/layout`,
-    partialsPath:  [`${__dirname}/templates/layout/partials`, `${__dirname}./templates/pages/partials`],
-    viewPath:      `${__dirname}/templates`
+    layoutsPath:   path.resolve(__dirname, 'templates/layout'),
+    partialsPath:  [
+      path.resolve(__dirname, 'templates/layout/partials'),
+      path.resolve(__dirname, 'templates/pages/partials')
+    ],
+    viewPath:      path.resolve(__dirname, 'templates')
   }))
   .use(router.routes())
   .listen(process.env.PORT || 4000);
