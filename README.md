@@ -1,8 +1,4 @@
-# Server - API only
-
-Mono repo
-
-* Using `oao`
+# TypeScript, Koa, Handlebar, Passport
 
 Core:
 
@@ -34,11 +30,15 @@ Inspirations:
 * https://github.com/FredericHeem/starhackit
 * https://github.com/embbnux/kails
 
+TypeScript:
+
+* https://github.com/angelozerr/tslint-language-service#vscode
+
 TODO
 
 * [x] Add bodyparser
-* [x] Add basic session management
-* [x] Add basic passport support
+* [ ] Add basic session management
+* [ ] Add basic passport support
 * [ ] Add facebook authentication
 * [ ] Add twitch authentication
 * [ ] Add sequalize (sqlite - dev, postgres - production) - https://github.com/sequelize/sequelize

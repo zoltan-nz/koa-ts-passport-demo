@@ -3,6 +3,7 @@
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as path from 'path';
+import { DefinePlugin } from 'webpack';
 
 export default {
   cache:   true,
@@ -45,6 +46,9 @@ export default {
   },
 
   plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
     new CheckerPlugin(),
     new CopyWebpackPlugin([
       {

@@ -8,9 +8,5 @@
   "engines": {
     "node": ">=7.6"
   },
-  "scripts": {},
-  "devDependencies": {
-    "webpack": "^2.4.1"
-  },
-  "dependencies": {}
+  "scripts": {}
 }
